@@ -1,0 +1,9 @@
+HTML(
+<div class="col-md-12 mt-3 mb-3">
+  <label for="clob" class="form-label fw-bold">Write a new Clob:</label>
+  <textarea class="form-control" id="clob" rows="3"></textarea>
+</div>
+<div class="col-auto">
+  <button type="submit" class="btn btn-primary mb-3">Clob!</button>
+</div>
+);

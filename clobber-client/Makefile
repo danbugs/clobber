@@ -1,7 +1,7 @@
 P=clobber-client
 OBJECTS=src/main.c
 EMCC=emcc
-EMCC_CFLAGS=-s MAIN_MODULE=1
+EMCC_CFLAGS=-s MAIN_MODULE=1 --js-library dependencies/dcw/dcw.js
 BUILDDIR=build
 DEPENDENCIES=dependencies/dcw/dcw.o 
 
