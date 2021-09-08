@@ -47,7 +47,7 @@ int main()
     int isProd = EM_ASM_INT(
         { return window.location.hostname == "127.0.0.1" ? 1 : 0; });
 
-    attr.url = isProd == 1 ? "ws://localhost:3000/" : "wss://clober-api.herokuapp.com";
+    attr.url = isProd == 1 ? "ws://localhost:3000/" : "wss://clobber-api.herokuapp.com";
 
     ws = emscripten_websocket_new(&attr);
 
