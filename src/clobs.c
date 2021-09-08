@@ -41,10 +41,13 @@ void set_clob(char *string)
             element.removeChild(element.lastChild);
         });
     char *tmp;
-    int char_count = (int) strlen(string);
-    if (char_count > 255) {
+    int char_count = (int)strlen(string);
+    if (char_count > 255)
+    {
         asprintf(&tmp, "<p style=\"color:red\">Character Count: %lu</p>", strlen(string));
-    } else {
+    }
+    else
+    {
         asprintf(&tmp, "<p>Character Count: %lu</p>", strlen(string));
     }
     EM_ASM_(
@@ -60,6 +63,18 @@ void set_clob(char *string)
 EMSCRIPTEN_KEEPALIVE
 void post_clob()
 {
+    int readyState = 0;
+    do
+    {
+        emscripten_websocket_get_ready_state(ws, &readyState);
+    } while (readyState == 0);
+    
+    EM_ASM(
+        let element = document.querySelector('#char_count');
+        while (element.lastChild)
+        {
+            element.removeChild(element.lastChild);
+        } element.innerHTML += "<p>Character Count: 0</p>");
     emscripten_websocket_send_utf8_text(ws, curr_clob);
     free(curr_clob);
 }

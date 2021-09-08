@@ -18,7 +18,6 @@ EM_BOOL wss_on_error(int eventType, const EmscriptenWebSocketErrorEvent *e, void
 
 EM_BOOL wss_on_message(int eventType, const EmscriptenWebSocketMessageEvent *e, void *userData)
 {
-
     clobs = split((char *)e->data, "\n", &num_clobs);
     get_all_clobs();
     return 0;
