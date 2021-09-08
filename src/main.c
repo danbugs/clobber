@@ -63,14 +63,19 @@ char **split(char *string, char *separator)
 
 void display_clobs()
 {
+    EM_ASM(
+        let element = document.querySelectorAll('.post');
+        if (element) {
+            element.forEach(function(e){e.remove()});
+        });
+
     if (clobs)
     {
         int i;
         for (i = 0; *(clobs + i); i++)
         {
             char *tmp;
-            asprintf(&tmp,
-            "<div class=\"container mb-3\"> \
+            asprintf(&tmp, "<div class=\"container mb-3 post\"> \
                 <div class=\"row\"> \
                     <div class=\"card col-md-12\"> \
                         <div class=\"card-body\"> \
@@ -79,13 +84,19 @@ void display_clobs()
                     </div> \
                 </div> \
             </div>",
-            *(clobs + i));
+                     *(clobs + i));
             free(*(clobs + i));
 
             display_html(tmp);
         }
+        free(clobs);
     }
-    free(clobs);
+}
+
+EMSCRIPTEN_KEEPALIVE
+void post_clob(char *string)
+{
+    emscripten_websocket_send_utf8_text(ws, string);
 }
 
 EM_BOOL wss_on_open(int eventType, const EmscriptenWebSocketOpenEvent *e, void *userData)
@@ -108,6 +119,7 @@ EM_BOOL wss_on_error(int eventType, const EmscriptenWebSocketErrorEvent *e, void
 
 EM_BOOL wss_on_message(int eventType, const EmscriptenWebSocketMessageEvent *e, void *userData)
 {
+
     clobs = split(e->data, "\n");
     display_clobs();
     return 0;

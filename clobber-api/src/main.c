@@ -2,12 +2,14 @@
 #include <stdlib.h>
 #include <emscripten.h>
 #include <time.h>
+#include <string.h>
 
 #include "../dependencies/dcs/dcs.h"
 
-extern Statement execute_sql(sql_t raw_sql, Table *table);
+extern char* execute_sql(sql_t raw_sql, Table *table);
 extern Table *open_table(char *table_name);
 extern void close_table(Table *table);
+Statement clobs;
 
 int generate_random_id()
 {
@@ -30,7 +32,7 @@ char* get_clobs()
 {
     Table *table = open_table("clob");
     sql_t new_select = SQL(SELECT);
-    Statement results = execute_sql(new_select, table);
+    char* results = execute_sql(new_select, table);
     close_table(table);
-    return results.select_result;
+    return results;
 }
