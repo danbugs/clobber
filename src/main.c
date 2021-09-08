@@ -1,130 +1,36 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <emscripten.h>
+/** Includes
+*/
+#include <stdio.h> // asprintf, printf
+#include <stdlib.h> // malloc, free, exit, EXIT_FAILURE
 #include <emscripten/websocket.h>
+
+/** Dependencies
+*/
 #include "../dependencies/dcw/dcw.h"
 
+/** Functions from dependencies
+*/
+extern void display_html(html_t raw_html);
+
+/** Global variables
+*/
+EMSCRIPTEN_WEBSOCKET_T ws = (EMSCRIPTEN_WEBSOCKET_T)NULL;
+char **clobs;
+char *curr_clob;
+int num_clobs;
+
+/** Submodules
+*/
+#include "displays.c"
+#include "utils.c"
+#include "clobs.c"
+#include "wss.c" // uses get_all_clobs, and split
+
+/** Main function & display
+*/
 html_t main_h =
 #include "../frontend/main.cml"
     ;
-
-html_t jumbotron_h =
-#include "../frontend/jumbotron.cml"
-    ;
-
-html_t form_h =
-#include "../frontend/form.cml"
-    ;
-
-extern void display_html(html_t raw_html);
-
-EMSCRIPTEN_WEBSOCKET_T ws = (EMSCRIPTEN_WEBSOCKET_T)NULL;
-char **clobs;
-
-EMSCRIPTEN_KEEPALIVE
-html_t jumbotron()
-{
-    return jumbotron_h;
-}
-
-EMSCRIPTEN_KEEPALIVE
-html_t form()
-{
-    return form_h;
-}
-
-char **split(char *string, char *separator)
-{
-    int counter = 1;
-    char *tmp = string;
-
-    while (*tmp)
-    {
-        if (*tmp == *separator)
-        {
-            counter++;
-        }
-        tmp++;
-    }
-
-    char **result = malloc(sizeof(char *) * counter);
-    char *token = strtok(string, separator);
-
-    int index = 0;
-    while (token)
-    {
-        *(result + index++) = strdup(token);
-        token = strtok(0, separator);
-    }
-    *(result + index) = 0;
-
-    return result;
-}
-
-void display_clobs()
-{
-    EM_ASM(
-        let element = document.querySelectorAll('.post');
-        if (element) {
-            element.forEach(function(e){e.remove()});
-        });
-
-    if (clobs)
-    {
-        int i;
-        for (i = 0; *(clobs + i); i++)
-        {
-            char *tmp;
-            asprintf(&tmp, "<div class=\"container mb-3 post\"> \
-                <div class=\"row\"> \
-                    <div class=\"card col-md-12\"> \
-                        <div class=\"card-body\"> \
-                            <p class=\"card-text\">%s \
-                        </div> \
-                    </div> \
-                </div> \
-            </div>",
-                     *(clobs + i));
-            free(*(clobs + i));
-
-            display_html(tmp);
-        }
-        free(clobs);
-    }
-}
-
-EMSCRIPTEN_KEEPALIVE
-void post_clob(char *string)
-{
-    emscripten_websocket_send_utf8_text(ws, string);
-}
-
-EM_BOOL wss_on_open(int eventType, const EmscriptenWebSocketOpenEvent *e, void *userData)
-{
-    printf("opened the connection!\n");
-    return 0;
-}
-
-EM_BOOL wss_on_close(int eventType, const EmscriptenWebSocketCloseEvent *e, void *userData)
-{
-    printf("closed the connection!\n");
-    return 0;
-}
-
-EM_BOOL wss_on_error(int eventType, const EmscriptenWebSocketErrorEvent *e, void *userData)
-{
-    printf("something went wrong!\n");
-    return 0;
-}
-
-EM_BOOL wss_on_message(int eventType, const EmscriptenWebSocketMessageEvent *e, void *userData)
-{
-
-    clobs = split(e->data, "\n");
-    display_clobs();
-    return 0;
-}
-
 int main()
 {
     display_html(main_h);

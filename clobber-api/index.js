@@ -15,6 +15,7 @@ Module["onRuntimeInitialized"] = function () {
     console.log("Client connected!");
     let clobs = Module._get_clobs();
     ws.send(Module.UTF8ToString(clobs).trim());
+    Module._free(clobs);
 
     ws.on("close", function () {
       console.log("Client disconnected!");
@@ -26,7 +27,7 @@ Module["onRuntimeInitialized"] = function () {
       Module._free(new_clob);
       clobs = Module._get_clobs();
       ws.send(Module.UTF8ToString(clobs).trim());
-      console.log(Module.UTF8ToString(clobs).trim());
+      Module._free(clobs);
     });
   });
 };

@@ -1,30 +1,32 @@
-#include <stdio.h>
-#include <stdlib.h>
+/** Includes
+*/
+#include <stdio.h> // sprintf
+#include <stdlib.h> // malloc, free, srand, rand
+#include <time.h> // time
 #include <emscripten.h>
-#include <time.h>
-#include <string.h>
 
+/** Dependencies
+*/
 #include "../dependencies/dcs/dcs.h"
 
+/** Functions from dependencies
+*/
 extern char* execute_sql(sql_t raw_sql, Table *table);
 extern Table *open_table(char *table_name);
 extern void close_table(Table *table);
-Statement clobs;
 
-int generate_random_id()
-{
-    srand(time(NULL));
-    return rand();
-}
-
+/** API functions
+*/
 EMSCRIPTEN_KEEPALIVE
 void make_clob(char *clob)
 {
     Table *table = open_table("clob");
-    char new_insert[264]; // 264 = COLUMN_CONTENT_SIZE + 8 (for int size) + 1 (for '\0')
-    sprintf(new_insert, "INSERT %d %s", generate_random_id(), clob);
+    char *new_insert;
+    srand(time(NULL));
+    asprintf(&new_insert, "INSERT %d %s", rand(), clob);
     execute_sql(new_insert, table);
     close_table(table);
+    free(new_insert);
 }
 
 EMSCRIPTEN_KEEPALIVE

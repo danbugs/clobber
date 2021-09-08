@@ -2,22 +2,21 @@ HTML(
 <form id="clob_form">
   <div class="col-md-12 mt-3 mb-3">
     <label for="clob" class="form-label fw-bold">Write a new Clob:</label>
-    <textarea class="form-control" id="clob" name="clob" rows="3"></textarea>
+    <textarea
+      oninput="$E{set_clob(Module.allocateUTF8(this.value))}$"
+      class="form-control"
+      id="clob"
+      name="clob"
+      rows="3"
+    ></textarea>
   </div>
 </form>
-<div class="col-auto">
-  <button
-    type="submit"
-    class="btn btn-primary mb-3"
-    onclick="
-      let clob_form = document.getElementById('clob_form'); 
-      let clob_form_data = new FormData(clob_form);
-      let clob = clob_form_data.get('clob');
-      let clob_string = Module.allocateUTF8(clob); 
-      $E{post_clob(clob_string)}$; 
-      Module._free(clob);"
-  >
+<div class="col-md-6">
+  <button type="submit" class="btn btn-primary mb-3" onclick="$E{post_clob()}$">
     Clob!
   </button>
+</div>
+<div class="offset-md-3 col-md-3" id="char_count">
+  <p>Character Count: 0</p>
 </div>
 );

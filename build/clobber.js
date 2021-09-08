@@ -1725,11 +1725,13 @@ var tempI64;
 
 var ASM_CONSTS = {
   224020: function() {let element = document.querySelectorAll('.post'); if (element) { element.forEach(function(e){e.remove()}); }},  
- 224129: function() {return window.location.hostname == "127.0.0.1" ? 1 : 0;},  
- 224189: function($0) {if (!$0) { AL.alcErr = 0xA004 ; return 1; }},  
- 224237: function($0) {err("bad name in alcGetProcAddress: " + UTF8ToString($0));},  
- 224300: function($0) {if (!AL.currentCtx) { err("alGetProcAddress() called without a valid context"); return 1; } if (!$0) { AL.currentCtx.err = 0xA003 ; return 1; }},  
- 224448: function($0) {err("bad name in alGetProcAddress: " + UTF8ToString($0));}
+ 224129: function() {let element = document.querySelector('#char_count'); while (element.lastChild) { element.removeChild(element.lastChild); }},  
+ 224252: function($0) {let element = document.querySelector('#char_count'); element.innerHTML += UTF8ToString($0);},  
+ 224348: function() {return window.location.hostname == "127.0.0.1" ? 1 : 0;},  
+ 224408: function($0) {if (!$0) { AL.alcErr = 0xA004 ; return 1; }},  
+ 224456: function($0) {err("bad name in alcGetProcAddress: " + UTF8ToString($0));},  
+ 224519: function($0) {if (!AL.currentCtx) { err("alGetProcAddress() called without a valid context"); return 1; } if (!$0) { AL.currentCtx.err = 0xA003 ; return 1; }},  
+ 224667: function($0) {err("bad name in alGetProcAddress: " + UTF8ToString($0));}
 };
 
 
@@ -1950,7 +1952,7 @@ var ASM_CONSTS = {
     }
   Module["createInvokeFunction"] = createInvokeFunction;
   
-  var ___heap_base = 5509520;
+  var ___heap_base = 5509776;
   Module["___heap_base"] = ___heap_base;
   function getMemory(size) {
       // After the runtime is initialized, we must only use sbrk() normally.
@@ -2623,7 +2625,7 @@ var ASM_CONSTS = {
   var ___memory_base = 1024;
   Module["___memory_base"] = ___memory_base;
 
-  var ___stack_pointer = new WebAssembly.Global({'value': 'i32', 'mutable': true}, 5509520);
+  var ___stack_pointer = new WebAssembly.Global({'value': 'i32', 'mutable': true}, 5509776);
   Module["___stack_pointer"] = ___stack_pointer;
 
   var PATH = {splitPath:function(filename) {
@@ -30835,10 +30837,13 @@ var _strtok = Module["_strtok"] = createExportWrapper("strtok");
 var _strdup = Module["_strdup"] = createExportWrapper("strdup");
 
 /** @type {function(...*):?} */
-var _display_clobs = Module["_display_clobs"] = createExportWrapper("display_clobs");
+var _get_all_clobs = Module["_get_all_clobs"] = createExportWrapper("get_all_clobs");
 
 /** @type {function(...*):?} */
 var _asprintf = Module["_asprintf"] = createExportWrapper("asprintf");
+
+/** @type {function(...*):?} */
+var _set_clob = Module["_set_clob"] = createExportWrapper("set_clob");
 
 /** @type {function(...*):?} */
 var _post_clob = Module["_post_clob"] = createExportWrapper("post_clob");
@@ -49870,18 +49875,20 @@ var _orig$_ZN10__cxxabiv119__setExceptionClassEP17_Unwind_Exceptiony = Module["_
 var _orig$fminl = Module["_orig$fminl"] = createExportWrapper("orig$fminl");
 
 var _ERROR_HTML = Module['_ERROR_HTML'] = 206896;
-var _jumbotron_h = Module['_jumbotron_h'] = 206904;
-var _form_h = Module['_form_h'] = 206908;
-var _clobs = Module['_clobs'] = 225540;
-var _ws = Module['_ws'] = 225536;
-var _main_h = Module['_main_h'] = 206900;
-var ___libc = Module['___libc'] = 225836;
-var ___progname = Module['___progname'] = 225828;
-var ___progname_full = Module['___progname_full'] = 225832;
-var ___hwcap = Module['___hwcap'] = 225900;
-var ___sysinfo = Module['___sysinfo'] = 225904;
-var _program_invocation_short_name = Module['_program_invocation_short_name'] = 225828;
-var _program_invocation_name = Module['_program_invocation_name'] = 225832;
+var _jumbotron_h = Module['_jumbotron_h'] = 206900;
+var _form_h = Module['_form_h'] = 206904;
+var _num_clobs = Module['_num_clobs'] = 225796;
+var _clobs = Module['_clobs'] = 225800;
+var _curr_clob = Module['_curr_clob'] = 225804;
+var _ws = Module['_ws'] = 225792;
+var _main_h = Module['_main_h'] = 206908;
+var ___libc = Module['___libc'] = 226092;
+var ___progname = Module['___progname'] = 226084;
+var ___progname_full = Module['___progname_full'] = 226088;
+var ___hwcap = Module['___hwcap'] = 226156;
+var ___sysinfo = Module['___sysinfo'] = 226160;
+var _program_invocation_short_name = Module['_program_invocation_short_name'] = 226084;
+var _program_invocation_name = Module['_program_invocation_name'] = 226088;
 var ___c_dot_utf8 = Module['___c_dot_utf8'] = 208156;
 var ___c_locale = Module['___c_locale'] = 51588;
 var ___c_dot_utf8_locale = Module['___c_dot_utf8_locale'] = 208184;
@@ -49890,38 +49897,38 @@ var ___pio2_lo = Module['___pio2_lo'] = 183928;
 var _atanlo = Module['_atanlo'] = 177584;
 var _atanhi = Module['_atanhi'] = 177520;
 var _aT = Module['_aT'] = 177648;
-var ___signgam = Module['___signgam'] = 226052;
-var _signgam = Module['_signgam'] = 226052;
+var ___signgam = Module['___signgam'] = 226308;
+var _signgam = Module['_signgam'] = 226308;
 var _stderr = Module['_stderr'] = 208744;
-var ___optreset = Module['___optreset'] = 226064;
+var ___optreset = Module['___optreset'] = 226320;
 var _optind = Module['_optind'] = 208312;
-var ___optpos = Module['___optpos'] = 226068;
-var _optarg = Module['_optarg'] = 226072;
-var _optopt = Module['_optopt'] = 226076;
+var ___optpos = Module['___optpos'] = 226324;
+var _optarg = Module['_optarg'] = 226328;
+var _optopt = Module['_optopt'] = 226332;
 var _opterr = Module['_opterr'] = 208316;
-var _optreset = Module['_optreset'] = 226064;
+var _optreset = Module['_optreset'] = 226320;
 var ___fsmu8 = Module['___fsmu8'] = 186880;
-var _h_errno = Module['_h_errno'] = 226560;
+var _h_errno = Module['_h_errno'] = 226816;
 var __ns_flagdata = Module['__ns_flagdata'] = 187360;
 var ___seed48 = Module['___seed48'] = 208480;
-var ___environ = Module['___environ'] = 229460;
+var ___environ = Module['___environ'] = 229716;
 var ___stdout_used = Module['___stdout_used'] = 209052;
 var _stdin = Module['_stdin'] = 208896;
 var _stdout = Module['_stdout'] = 209048;
 var ___stderr_used = Module['___stderr_used'] = 208748;
 var ___stdin_used = Module['___stdin_used'] = 208900;
-var ____environ = Module['____environ'] = 229460;
-var __environ = Module['__environ'] = 229460;
-var _environ = Module['_environ'] = 229460;
-var ___env_map = Module['___env_map'] = 229468;
-var _tzname = Module['_tzname'] = 229472;
-var _daylight = Module['_daylight'] = 229480;
-var _timezone = Module['_timezone'] = 229484;
-var ___sig_pending = Module['___sig_pending'] = 238716;
-var ___sig_actions = Module['___sig_actions'] = 229488;
-var ___data_end = Module['___data_end'] = 266640;
-var ___THREW__ = Module['___THREW__'] = 242988;
-var ___threwValue = Module['___threwValue'] = 242992;
+var ____environ = Module['____environ'] = 229716;
+var __environ = Module['__environ'] = 229716;
+var _environ = Module['_environ'] = 229716;
+var ___env_map = Module['___env_map'] = 229724;
+var _tzname = Module['_tzname'] = 229728;
+var _daylight = Module['_daylight'] = 229736;
+var _timezone = Module['_timezone'] = 229740;
+var ___sig_pending = Module['___sig_pending'] = 238972;
+var ___sig_actions = Module['___sig_actions'] = 229744;
+var ___data_end = Module['___data_end'] = 266896;
+var ___THREW__ = Module['___THREW__'] = 243244;
+var ___threwValue = Module['___threwValue'] = 243248;
 var __ZTVSt12bad_any_cast = Module['__ZTVSt12bad_any_cast'] = 209200;
 var __ZTISt12bad_any_cast = Module['__ZTISt12bad_any_cast'] = 209220;
 var __ZTSSt12bad_any_cast = Module['__ZTSSt12bad_any_cast'] = 189647;
@@ -49969,7 +49976,7 @@ var __ZTINSt3__212__do_messageE = Module['__ZTINSt3__212__do_messageE'] = 218380
 var __ZTSNSt3__212future_errorE = Module['__ZTSNSt3__212future_errorE'] = 190059;
 var __ZTISt11logic_error = Module['__ZTISt11logic_error'] = 223248;
 var __ZTVNSt3__28ios_base7failureE = Module['__ZTVNSt3__28ios_base7failureE'] = 209544;
-var __ZNSt3__28ios_base9__xindex_E = Module['__ZNSt3__28ios_base9__xindex_E'] = 259456;
+var __ZNSt3__28ios_base9__xindex_E = Module['__ZNSt3__28ios_base9__xindex_E'] = 259712;
 var __ZTVNSt3__28ios_baseE = Module['__ZTVNSt3__28ios_baseE'] = 209564;
 var __ZTVNSt3__219__iostream_categoryE = Module['__ZTVNSt3__219__iostream_categoryE'] = 209508;
 var __ZTINSt3__219__iostream_categoryE = Module['__ZTINSt3__219__iostream_categoryE'] = 209592;
@@ -50010,24 +50017,24 @@ var __ZTINSt3__212system_errorE = Module['__ZTINSt3__212system_errorE'] = 218416
 var __ZTVNSt3__215basic_streambufIcNS_11char_traitsIcEEEE = Module['__ZTVNSt3__215basic_streambufIcNS_11char_traitsIcEEEE'] = 209616;
 var __ZTVNSt3__215basic_streambufIwNS_11char_traitsIwEEEE = Module['__ZTVNSt3__215basic_streambufIwNS_11char_traitsIwEEEE'] = 209680;
 var __ZTTNSt3__213basic_istreamIcNS_11char_traitsIcEEEE = Module['__ZTTNSt3__213basic_istreamIcNS_11char_traitsIcEEEE'] = 209784;
-var __ZNSt3__25ctypeIcE2idE = Module['__ZNSt3__25ctypeIcE2idE'] = 260716;
+var __ZNSt3__25ctypeIcE2idE = Module['__ZNSt3__25ctypeIcE2idE'] = 260972;
 var __ZTTNSt3__213basic_istreamIwNS_11char_traitsIwEEEE = Module['__ZTTNSt3__213basic_istreamIwNS_11char_traitsIwEEEE'] = 209832;
-var __ZNSt3__25ctypeIwE2idE = Module['__ZNSt3__25ctypeIwE2idE'] = 260708;
+var __ZNSt3__25ctypeIwE2idE = Module['__ZNSt3__25ctypeIwE2idE'] = 260964;
 var __ZTTNSt3__213basic_ostreamIcNS_11char_traitsIcEEEE = Module['__ZTTNSt3__213basic_ostreamIcNS_11char_traitsIcEEEE'] = 209880;
-var __ZNSt3__27num_putIcNS_19ostreambuf_iteratorIcNS_11char_traitsIcEEEEE2idE = Module['__ZNSt3__27num_putIcNS_19ostreambuf_iteratorIcNS_11char_traitsIcEEEEE2idE'] = 260544;
+var __ZNSt3__27num_putIcNS_19ostreambuf_iteratorIcNS_11char_traitsIcEEEEE2idE = Module['__ZNSt3__27num_putIcNS_19ostreambuf_iteratorIcNS_11char_traitsIcEEEEE2idE'] = 260800;
 var __ZTTNSt3__213basic_ostreamIwNS_11char_traitsIwEEEE = Module['__ZTTNSt3__213basic_ostreamIwNS_11char_traitsIwEEEE'] = 209928;
-var __ZNSt3__27num_putIwNS_19ostreambuf_iteratorIwNS_11char_traitsIwEEEEE2idE = Module['__ZNSt3__27num_putIwNS_19ostreambuf_iteratorIwNS_11char_traitsIwEEEEE2idE'] = 260552;
+var __ZNSt3__27num_putIwNS_19ostreambuf_iteratorIwNS_11char_traitsIwEEEEE2idE = Module['__ZNSt3__27num_putIwNS_19ostreambuf_iteratorIwNS_11char_traitsIwEEEEE2idE'] = 260808;
 var __ZTTNSt3__214basic_iostreamIcNS_11char_traitsIcEEEE = Module['__ZTTNSt3__214basic_iostreamIcNS_11char_traitsIcEEEE'] = 209996;
 var __ZTVNSt3__215basic_stringbufIcNS_11char_traitsIcEENS_9allocatorIcEEEE = Module['__ZTVNSt3__215basic_stringbufIcNS_11char_traitsIcEENS_9allocatorIcEEEE'] = 210024;
 var __ZTVNSt3__213basic_filebufIcNS_11char_traitsIcEEEE = Module['__ZTVNSt3__213basic_filebufIcNS_11char_traitsIcEEEE'] = 210088;
-var __ZNSt3__27codecvtIcc11__mbstate_tE2idE = Module['__ZNSt3__27codecvtIcc11__mbstate_tE2idE'] = 260724;
+var __ZNSt3__27codecvtIcc11__mbstate_tE2idE = Module['__ZNSt3__27codecvtIcc11__mbstate_tE2idE'] = 260980;
 var __ZTTNSt3__218basic_stringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE = Module['__ZTTNSt3__218basic_stringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE'] = 210504;
 var __ZTTNSt3__219basic_ostringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE = Module['__ZTTNSt3__219basic_ostringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE'] = 210736;
 var __ZTTNSt3__219basic_istringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE = Module['__ZTTNSt3__219basic_istringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE'] = 210844;
 var __ZTTNSt3__214basic_ifstreamIcNS_11char_traitsIcEEEE = Module['__ZTTNSt3__214basic_ifstreamIcNS_11char_traitsIcEEEE'] = 210952;
 var __ZTTNSt3__214basic_ofstreamIcNS_11char_traitsIcEEEE = Module['__ZTTNSt3__214basic_ofstreamIcNS_11char_traitsIcEEEE'] = 211060;
-var __ZNSt3__27num_getIcNS_19istreambuf_iteratorIcNS_11char_traitsIcEEEEE2idE = Module['__ZNSt3__27num_getIcNS_19istreambuf_iteratorIcNS_11char_traitsIcEEEEE2idE'] = 260528;
-var __ZNSt3__27num_getIwNS_19istreambuf_iteratorIwNS_11char_traitsIwEEEEE2idE = Module['__ZNSt3__27num_getIwNS_19istreambuf_iteratorIwNS_11char_traitsIwEEEEE2idE'] = 260536;
+var __ZNSt3__27num_getIcNS_19istreambuf_iteratorIcNS_11char_traitsIcEEEEE2idE = Module['__ZNSt3__27num_getIcNS_19istreambuf_iteratorIcNS_11char_traitsIcEEEEE2idE'] = 260784;
+var __ZNSt3__27num_getIwNS_19istreambuf_iteratorIwNS_11char_traitsIwEEEEE2idE = Module['__ZNSt3__27num_getIwNS_19istreambuf_iteratorIwNS_11char_traitsIwEEEEE2idE'] = 260792;
 var __ZTINSt3__215basic_streambufIcNS_11char_traitsIcEEEE = Module['__ZTINSt3__215basic_streambufIcNS_11char_traitsIcEEEE'] = 210208;
 var __ZTINSt3__215basic_streambufIwNS_11char_traitsIwEEEE = Module['__ZTINSt3__215basic_streambufIwNS_11char_traitsIwEEEE'] = 210216;
 var __ZTVNSt3__213basic_istreamIcNS_11char_traitsIcEEEE = Module['__ZTVNSt3__213basic_istreamIcNS_11char_traitsIcEEEE'] = 209744;
@@ -50082,20 +50089,20 @@ var __ZTINSt3__214basic_ofstreamIcNS_11char_traitsIcEEEE = Module['__ZTINSt3__21
 var __ZTCNSt3__214basic_ofstreamIcNS_11char_traitsIcEEEE0_NS_13basic_ostreamIcS2_EE = Module['__ZTCNSt3__214basic_ofstreamIcNS_11char_traitsIcEEEE0_NS_13basic_ostreamIcS2_EE'] = 211076;
 var __ZTSNSt3__214basic_ofstreamIcNS_11char_traitsIcEEEE = Module['__ZTSNSt3__214basic_ofstreamIcNS_11char_traitsIcEEEE'] = 191407;
 var __ZTSNSt3__213basic_filebufIcNS_11char_traitsIcEEEE = Module['__ZTSNSt3__213basic_filebufIcNS_11char_traitsIcEEEE'] = 191455;
-var __ZNSt3__219__start_std_streamsE = Module['__ZNSt3__219__start_std_streamsE'] = 260148;
-var __ZNSt3__23cinE = Module['__ZNSt3__23cinE'] = 259468;
-var __ZNSt3__24wcinE = Module['__ZNSt3__24wcinE'] = 259556;
-var __ZNSt3__24coutE = Module['__ZNSt3__24coutE'] = 259644;
-var __ZNSt3__25wcoutE = Module['__ZNSt3__25wcoutE'] = 259728;
-var __ZNSt3__24cerrE = Module['__ZNSt3__24cerrE'] = 259812;
-var __ZNSt3__24clogE = Module['__ZNSt3__24clogE'] = 259980;
-var __ZNSt3__25wcerrE = Module['__ZNSt3__25wcerrE'] = 259896;
-var __ZNSt3__25wclogE = Module['__ZNSt3__25wclogE'] = 260064;
+var __ZNSt3__219__start_std_streamsE = Module['__ZNSt3__219__start_std_streamsE'] = 260404;
+var __ZNSt3__23cinE = Module['__ZNSt3__23cinE'] = 259724;
+var __ZNSt3__24wcinE = Module['__ZNSt3__24wcinE'] = 259812;
+var __ZNSt3__24coutE = Module['__ZNSt3__24coutE'] = 259900;
+var __ZNSt3__25wcoutE = Module['__ZNSt3__25wcoutE'] = 259984;
+var __ZNSt3__24cerrE = Module['__ZNSt3__24cerrE'] = 260068;
+var __ZNSt3__24clogE = Module['__ZNSt3__24clogE'] = 260236;
+var __ZNSt3__25wcerrE = Module['__ZNSt3__25wcerrE'] = 260152;
+var __ZNSt3__25wclogE = Module['__ZNSt3__25wclogE'] = 260320;
 var __ZTVNSt3__210__stdinbufIcEE = Module['__ZTVNSt3__210__stdinbufIcEE'] = 211140;
 var __ZTVNSt3__210__stdinbufIwEE = Module['__ZTVNSt3__210__stdinbufIwEE'] = 211216;
 var __ZTVNSt3__211__stdoutbufIcEE = Module['__ZTVNSt3__211__stdoutbufIcEE'] = 211292;
 var __ZTVNSt3__211__stdoutbufIwEE = Module['__ZTVNSt3__211__stdoutbufIwEE'] = 211368;
-var __ZNSt3__27codecvtIwc11__mbstate_tE2idE = Module['__ZNSt3__27codecvtIwc11__mbstate_tE2idE'] = 260732;
+var __ZNSt3__27codecvtIwc11__mbstate_tE2idE = Module['__ZNSt3__27codecvtIwc11__mbstate_tE2idE'] = 260988;
 var __ZTINSt3__210__stdinbufIcEE = Module['__ZTINSt3__210__stdinbufIcEE'] = 211204;
 var __ZTSNSt3__210__stdinbufIcEE = Module['__ZTSNSt3__210__stdinbufIcEE'] = 191502;
 var __ZTINSt3__210__stdinbufIwEE = Module['__ZTINSt3__210__stdinbufIwEE'] = 211280;
@@ -50104,29 +50111,29 @@ var __ZTINSt3__211__stdoutbufIcEE = Module['__ZTINSt3__211__stdoutbufIcEE'] = 21
 var __ZTSNSt3__211__stdoutbufIcEE = Module['__ZTSNSt3__211__stdoutbufIcEE'] = 191550;
 var __ZTINSt3__211__stdoutbufIwEE = Module['__ZTINSt3__211__stdoutbufIwEE'] = 211432;
 var __ZTSNSt3__211__stdoutbufIwEE = Module['__ZTSNSt3__211__stdoutbufIwEE'] = 191575;
-var __ZNSt3__28numpunctIcE2idE = Module['__ZNSt3__28numpunctIcE2idE'] = 260756;
+var __ZNSt3__28numpunctIcE2idE = Module['__ZNSt3__28numpunctIcE2idE'] = 261012;
 var __ZNSt3__214__num_get_base5__srcE = Module['__ZNSt3__214__num_get_base5__srcE'] = 191600;
-var __ZNSt3__28numpunctIwE2idE = Module['__ZNSt3__28numpunctIwE2idE'] = 260764;
-var __ZNSt3__210moneypunctIcLb1EE2idE = Module['__ZNSt3__210moneypunctIcLb1EE2idE'] = 260600;
-var __ZNSt3__210moneypunctIcLb0EE2idE = Module['__ZNSt3__210moneypunctIcLb0EE2idE'] = 260592;
-var __ZNSt3__210moneypunctIwLb1EE2idE = Module['__ZNSt3__210moneypunctIwLb1EE2idE'] = 260616;
-var __ZNSt3__210moneypunctIwLb0EE2idE = Module['__ZNSt3__210moneypunctIwLb0EE2idE'] = 260608;
+var __ZNSt3__28numpunctIwE2idE = Module['__ZNSt3__28numpunctIwE2idE'] = 261020;
+var __ZNSt3__210moneypunctIcLb1EE2idE = Module['__ZNSt3__210moneypunctIcLb1EE2idE'] = 260856;
+var __ZNSt3__210moneypunctIcLb0EE2idE = Module['__ZNSt3__210moneypunctIcLb0EE2idE'] = 260848;
+var __ZNSt3__210moneypunctIwLb1EE2idE = Module['__ZNSt3__210moneypunctIwLb1EE2idE'] = 260872;
+var __ZNSt3__210moneypunctIwLb0EE2idE = Module['__ZNSt3__210moneypunctIwLb0EE2idE'] = 260864;
 var __ZTVNSt3__26locale5__impE = Module['__ZTVNSt3__26locale5__impE'] = 211444;
 var __ZTVNSt3__26locale5facetE = Module['__ZTVNSt3__26locale5facetE'] = 211908;
-var __ZNSt3__27collateIcE2idE = Module['__ZNSt3__27collateIcE2idE'] = 260512;
-var __ZNSt3__27collateIwE2idE = Module['__ZNSt3__27collateIwE2idE'] = 260520;
-var __ZNSt3__27codecvtIDsc11__mbstate_tE2idE = Module['__ZNSt3__27codecvtIDsc11__mbstate_tE2idE'] = 260740;
-var __ZNSt3__27codecvtIDic11__mbstate_tE2idE = Module['__ZNSt3__27codecvtIDic11__mbstate_tE2idE'] = 260748;
-var __ZNSt3__29money_getIcNS_19istreambuf_iteratorIcNS_11char_traitsIcEEEEE2idE = Module['__ZNSt3__29money_getIcNS_19istreambuf_iteratorIcNS_11char_traitsIcEEEEE2idE'] = 260624;
-var __ZNSt3__29money_getIwNS_19istreambuf_iteratorIwNS_11char_traitsIwEEEEE2idE = Module['__ZNSt3__29money_getIwNS_19istreambuf_iteratorIwNS_11char_traitsIwEEEEE2idE'] = 260632;
-var __ZNSt3__29money_putIcNS_19ostreambuf_iteratorIcNS_11char_traitsIcEEEEE2idE = Module['__ZNSt3__29money_putIcNS_19ostreambuf_iteratorIcNS_11char_traitsIcEEEEE2idE'] = 260640;
-var __ZNSt3__29money_putIwNS_19ostreambuf_iteratorIwNS_11char_traitsIwEEEEE2idE = Module['__ZNSt3__29money_putIwNS_19ostreambuf_iteratorIwNS_11char_traitsIwEEEEE2idE'] = 260648;
-var __ZNSt3__28time_getIcNS_19istreambuf_iteratorIcNS_11char_traitsIcEEEEE2idE = Module['__ZNSt3__28time_getIcNS_19istreambuf_iteratorIcNS_11char_traitsIcEEEEE2idE'] = 260560;
-var __ZNSt3__28time_getIwNS_19istreambuf_iteratorIwNS_11char_traitsIwEEEEE2idE = Module['__ZNSt3__28time_getIwNS_19istreambuf_iteratorIwNS_11char_traitsIwEEEEE2idE'] = 260568;
-var __ZNSt3__28time_putIcNS_19ostreambuf_iteratorIcNS_11char_traitsIcEEEEE2idE = Module['__ZNSt3__28time_putIcNS_19ostreambuf_iteratorIcNS_11char_traitsIcEEEEE2idE'] = 260576;
-var __ZNSt3__28time_putIwNS_19ostreambuf_iteratorIwNS_11char_traitsIwEEEEE2idE = Module['__ZNSt3__28time_putIwNS_19ostreambuf_iteratorIwNS_11char_traitsIwEEEEE2idE'] = 260584;
-var __ZNSt3__28messagesIcE2idE = Module['__ZNSt3__28messagesIcE2idE'] = 260656;
-var __ZNSt3__28messagesIwE2idE = Module['__ZNSt3__28messagesIwE2idE'] = 260664;
+var __ZNSt3__27collateIcE2idE = Module['__ZNSt3__27collateIcE2idE'] = 260768;
+var __ZNSt3__27collateIwE2idE = Module['__ZNSt3__27collateIwE2idE'] = 260776;
+var __ZNSt3__27codecvtIDsc11__mbstate_tE2idE = Module['__ZNSt3__27codecvtIDsc11__mbstate_tE2idE'] = 260996;
+var __ZNSt3__27codecvtIDic11__mbstate_tE2idE = Module['__ZNSt3__27codecvtIDic11__mbstate_tE2idE'] = 261004;
+var __ZNSt3__29money_getIcNS_19istreambuf_iteratorIcNS_11char_traitsIcEEEEE2idE = Module['__ZNSt3__29money_getIcNS_19istreambuf_iteratorIcNS_11char_traitsIcEEEEE2idE'] = 260880;
+var __ZNSt3__29money_getIwNS_19istreambuf_iteratorIwNS_11char_traitsIwEEEEE2idE = Module['__ZNSt3__29money_getIwNS_19istreambuf_iteratorIwNS_11char_traitsIwEEEEE2idE'] = 260888;
+var __ZNSt3__29money_putIcNS_19ostreambuf_iteratorIcNS_11char_traitsIcEEEEE2idE = Module['__ZNSt3__29money_putIcNS_19ostreambuf_iteratorIcNS_11char_traitsIcEEEEE2idE'] = 260896;
+var __ZNSt3__29money_putIwNS_19ostreambuf_iteratorIwNS_11char_traitsIwEEEEE2idE = Module['__ZNSt3__29money_putIwNS_19ostreambuf_iteratorIwNS_11char_traitsIwEEEEE2idE'] = 260904;
+var __ZNSt3__28time_getIcNS_19istreambuf_iteratorIcNS_11char_traitsIcEEEEE2idE = Module['__ZNSt3__28time_getIcNS_19istreambuf_iteratorIcNS_11char_traitsIcEEEEE2idE'] = 260816;
+var __ZNSt3__28time_getIwNS_19istreambuf_iteratorIwNS_11char_traitsIwEEEEE2idE = Module['__ZNSt3__28time_getIwNS_19istreambuf_iteratorIwNS_11char_traitsIwEEEEE2idE'] = 260824;
+var __ZNSt3__28time_putIcNS_19ostreambuf_iteratorIcNS_11char_traitsIcEEEEE2idE = Module['__ZNSt3__28time_putIcNS_19ostreambuf_iteratorIcNS_11char_traitsIcEEEEE2idE'] = 260832;
+var __ZNSt3__28time_putIwNS_19ostreambuf_iteratorIwNS_11char_traitsIwEEEEE2idE = Module['__ZNSt3__28time_putIwNS_19ostreambuf_iteratorIwNS_11char_traitsIwEEEEE2idE'] = 260840;
+var __ZNSt3__28messagesIcE2idE = Module['__ZNSt3__28messagesIcE2idE'] = 260912;
+var __ZNSt3__28messagesIwE2idE = Module['__ZNSt3__28messagesIwE2idE'] = 260920;
 var __ZTVNSt3__214codecvt_bynameIcc11__mbstate_tEE = Module['__ZTVNSt3__214codecvt_bynameIcc11__mbstate_tEE'] = 215900;
 var __ZTVNSt3__214codecvt_bynameIwc11__mbstate_tEE = Module['__ZTVNSt3__214codecvt_bynameIwc11__mbstate_tEE'] = 215960;
 var __ZTVNSt3__214codecvt_bynameIDsc11__mbstate_tEE = Module['__ZTVNSt3__214codecvt_bynameIDsc11__mbstate_tEE'] = 216020;
@@ -50141,7 +50148,7 @@ var __ZTVNSt3__215time_put_bynameIcNS_19ostreambuf_iteratorIcNS_11char_traitsIcE
 var __ZTVNSt3__215time_put_bynameIwNS_19ostreambuf_iteratorIwNS_11char_traitsIwEEEEEE = Module['__ZTVNSt3__215time_put_bynameIwNS_19ostreambuf_iteratorIwNS_11char_traitsIwEEEEEE'] = 214736;
 var __ZTVNSt3__215messages_bynameIcEE = Module['__ZTVNSt3__215messages_bynameIcEE'] = 215812;
 var __ZTVNSt3__215messages_bynameIwEE = Module['__ZTVNSt3__215messages_bynameIwEE'] = 215856;
-var __ZNSt3__26locale2id9__next_idE = Module['__ZNSt3__26locale2id9__next_idE'] = 260704;
+var __ZNSt3__26locale2id9__next_idE = Module['__ZNSt3__26locale2id9__next_idE'] = 260960;
 var __ZTVNSt3__214collate_bynameIcEE = Module['__ZTVNSt3__214collate_bynameIcEE'] = 211464;
 var __ZTVNSt3__214collate_bynameIwEE = Module['__ZTVNSt3__214collate_bynameIwEE'] = 211496;
 var __ZTVNSt3__25ctypeIcEE = Module['__ZTVNSt3__25ctypeIcEE'] = 211528;
@@ -50416,7 +50423,7 @@ var __ZTSSt19bad_optional_access = Module['__ZTSSt19bad_optional_access'] = 1963
 var __ZTVNSt12experimental19bad_optional_accessE = Module['__ZTVNSt12experimental19bad_optional_accessE'] = 216500;
 var __ZTINSt12experimental19bad_optional_accessE = Module['__ZTINSt12experimental19bad_optional_accessE'] = 216520;
 var __ZTSNSt12experimental19bad_optional_accessE = Module['__ZTSNSt12experimental19bad_optional_accessE'] = 196385;
-var __ZNSt3__212__rs_default4__c_E = Module['__ZNSt3__212__rs_default4__c_E'] = 263068;
+var __ZNSt3__212__rs_default4__c_E = Module['__ZNSt3__212__rs_default4__c_E'] = 263324;
 var __ZTVNSt3__211regex_errorE = Module['__ZTVNSt3__211regex_errorE'] = 216532;
 var __ZTINSt3__211regex_errorE = Module['__ZTINSt3__211regex_errorE'] = 217576;
 var __ZTSNSt3__211regex_errorE = Module['__ZTSNSt3__211regex_errorE'] = 196425;
@@ -50484,7 +50491,7 @@ var __ZNSt3__24__fs10filesystem4path19preferred_separatorE = Module['__ZNSt3__24
 var __ZTSNSt3__24__fs10filesystem16filesystem_errorE = Module['__ZTSNSt3__24__fs10filesystem16filesystem_errorE'] = 197369;
 var ___cxa_unexpected_handler = Module['___cxa_unexpected_handler'] = 218704;
 var ___cxa_terminate_handler = Module['___cxa_terminate_handler'] = 218700;
-var ___cxa_new_handler = Module['___cxa_new_handler'] = 265620;
+var ___cxa_new_handler = Module['___cxa_new_handler'] = 265876;
 var __ZTVSt9bad_alloc = Module['__ZTVSt9bad_alloc'] = 223064;
 var __ZTVSt20bad_array_new_length = Module['__ZTVSt20bad_array_new_length'] = 223084;
 var __ZTISt9bad_alloc = Module['__ZTISt9bad_alloc'] = 223164;
@@ -51023,7 +51030,7 @@ function stackCheckInit() {
   // get these values before even running any of the ctors so we call it redundantly
   // here.
   // TODO(sbc): Move writeStackCookie to native to to avoid this.
-  _emscripten_stack_set_limits(5509520, 266640);
+  _emscripten_stack_set_limits(5509776, 266896);
   writeStackCookie();
 }
 
