@@ -3,6 +3,7 @@
 #include <stdio.h> // asprintf, printf
 #include <stdlib.h> // malloc, free, exit, EXIT_FAILURE
 #include <emscripten/websocket.h>
+#include <emscripten/threading.h>
 
 /** Dependencies
 */

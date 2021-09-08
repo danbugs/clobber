@@ -63,12 +63,14 @@ void set_clob(char *string)
 EMSCRIPTEN_KEEPALIVE
 void post_clob()
 {
-    int readyState = 0;
+    // Synchronously wait until connection has been established.
+    uint16_t readyState = 0;
     do
     {
         emscripten_websocket_get_ready_state(ws, &readyState);
+        emscripten_thread_sleep(100);
     } while (readyState == 0);
-    
+
     EM_ASM(
         let element = document.querySelector('#char_count');
         while (element.lastChild)
