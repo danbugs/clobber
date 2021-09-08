@@ -1,4 +1,4 @@
-P=clobber-server
+P=clobber-api
 OBJECTS=src/main.c
 EMCC=emcc
 EMCC_CFLAGS=-s MAIN_MODULE=1 -lnodefs.js -s EXIT_RUNTIME=1 -s "EXPORTED_RUNTIME_METHODS=[UTF8ToString, allocateUTF8]"

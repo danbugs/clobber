@@ -4,6 +4,5 @@ HTML(
       ${jumbotron()}$
   </div>
   <div class="row">${form()}$</div>
-  <div class="row">${feed()}$</div>
 </div>
 );

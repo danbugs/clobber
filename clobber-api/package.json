@@ -1,0 +1,23 @@
+{
+  "name": "clobber-server",
+  "version": "0.1.0",
+  "description": "A simplified Twitter clone built with C!",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/danbugs/clobber.git"
+  },
+  "author": "danbugs",
+  "license": "AGPL-3.0",
+  "bugs": {
+    "url": "https://github.com/danbugs/clobber/issues"
+  },
+  "homepage": "https://github.com/danbugs/clobber#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "ws": "^8.2.1"
+  }
+}
