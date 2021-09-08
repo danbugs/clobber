@@ -1,9 +1,11 @@
 /** Includes
 */
-#include <stdio.h> // asprintf, printf
+#include <stdio.h>  // asprintf, printf
 #include <stdlib.h> // malloc, free, exit, EXIT_FAILURE
+#include <stdbool.h> // bool, true, false
 #include <emscripten/websocket.h>
 #include <emscripten/threading.h>
+
 
 /** Dependencies
 */
@@ -20,6 +22,7 @@ EmscriptenWebSocketCreateAttributes attr;
 char **clobs;
 char *curr_clob;
 int num_clobs;
+bool connected;
 
 /** Submodules
 */

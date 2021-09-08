@@ -14626,26 +14626,14 @@ var ASM_CONSTS = {
     }
   Module["_emscripten_thread_sleep"] = _emscripten_thread_sleep;
 
-  var WS = {sockets:[null],socketEvent:null};
-  Module["WS"] = WS;
-  function _emscripten_websocket_get_ready_state(socketId, readyState) {
-      var socket = WS.sockets[socketId];
-      if (!socket) {
-        return -3;
-      }
-  
-      HEAP16[((readyState)>>1)] = socket.readyState;
-      return 0;
-    }
-  Module["_emscripten_websocket_get_ready_state"] = _emscripten_websocket_get_ready_state;
-  _emscripten_websocket_get_ready_state.sig = 'iii';
-
   function _emscripten_websocket_is_supported() {
       return typeof WebSocket !== 'undefined';
     }
   Module["_emscripten_websocket_is_supported"] = _emscripten_websocket_is_supported;
   _emscripten_websocket_is_supported.sig = 'i';
 
+  var WS = {sockets:[null],socketEvent:null};
+  Module["WS"] = WS;
   function _emscripten_websocket_new(createAttributes) {
       if (typeof WebSocket === 'undefined') {
         return -1;
@@ -29968,6 +29956,17 @@ var ASM_CONSTS = {
   ___cxa_thread_atexit_impl.sig = 'iii';
 
 
+  function _emscripten_websocket_get_ready_state(socketId, readyState) {
+      var socket = WS.sockets[socketId];
+      if (!socket) {
+        return -3;
+      }
+  
+      HEAP16[((readyState)>>1)] = socket.readyState;
+      return 0;
+    }
+  Module["_emscripten_websocket_get_ready_state"] = _emscripten_websocket_get_ready_state;
+  _emscripten_websocket_get_ready_state.sig = 'iii';
 
   function _emscripten_websocket_get_buffered_amount(socketId, bufferedAmount) {
       var socket = WS.sockets[socketId];
@@ -30751,7 +30750,6 @@ var asmLibraryArg = {
   "emscripten_resize_heap": _emscripten_resize_heap,
   "emscripten_run_script_int": _emscripten_run_script_int,
   "emscripten_thread_sleep": _emscripten_thread_sleep,
-  "emscripten_websocket_get_ready_state": _emscripten_websocket_get_ready_state,
   "emscripten_websocket_is_supported": _emscripten_websocket_is_supported,
   "emscripten_websocket_new": _emscripten_websocket_new,
   "emscripten_websocket_send_utf8_text": _emscripten_websocket_send_utf8_text,
@@ -49883,8 +49881,9 @@ var _form_h = Module['_form_h'] = 206904;
 var _num_clobs = Module['_num_clobs'] = 225988;
 var _clobs = Module['_clobs'] = 225992;
 var _curr_clob = Module['_curr_clob'] = 225996;
+var _connected = Module['_connected'] = 226000;
 var _ws = Module['_ws'] = 225984;
-var _attr = Module['_attr'] = 226000;
+var _attr = Module['_attr'] = 226004;
 var _main_h = Module['_main_h'] = 206908;
 var ___libc = Module['___libc'] = 226300;
 var ___progname = Module['___progname'] = 226292;
