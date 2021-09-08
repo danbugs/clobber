@@ -26,7 +26,9 @@ Module["onRuntimeInitialized"] = function () {
       Module._make_clob(new_clob);
       Module._free(new_clob);
       clobs = Module._get_clobs();
-      ws.send(Module.UTF8ToString(clobs).trim());
+      wss.clients.forEach((client) => {
+        client.send(Module.UTF8ToString(clobs).trim());
+      });
       Module._free(clobs);
     });
   });
