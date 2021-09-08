@@ -63,15 +63,9 @@ void set_clob(char *string)
 EMSCRIPTEN_KEEPALIVE
 void post_clob()
 {
-    // Synchronously wait until connection has been established.
-    uint16_t readyState = 0;
-    do
-    {
-        emscripten_websocket_get_ready_state(ws, &readyState);
-        emscripten_thread_sleep(100);
-    } while (readyState == 0);
 
-    if ( readyState != 1) { 
+    if (!connected)
+    {
         EM_ASM(window.location.reload());
     }
 
