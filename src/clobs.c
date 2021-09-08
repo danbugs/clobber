@@ -71,7 +71,8 @@ void post_clob()
         emscripten_thread_sleep(100);
     } while (readyState == 0);
 
-    if ( readyState != 1) { 
+    while (readyState != 1)
+    {
         ws = emscripten_websocket_new(&attr);
         emscripten_thread_sleep(100);
     }
