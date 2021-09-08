@@ -16,6 +16,7 @@ extern void display_html(html_t raw_html);
 /** Global variables
 */
 EMSCRIPTEN_WEBSOCKET_T ws = (EMSCRIPTEN_WEBSOCKET_T)NULL;
+EmscriptenWebSocketCreateAttributes attr;
 char **clobs;
 char *curr_clob;
 int num_clobs;
@@ -42,7 +43,6 @@ int main()
         exit(EXIT_FAILURE);
     }
 
-    EmscriptenWebSocketCreateAttributes attr;
     emscripten_websocket_init_create_attributes(&attr);
 
     int isProd = EM_ASM_INT(
