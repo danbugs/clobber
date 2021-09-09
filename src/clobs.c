@@ -63,12 +63,6 @@ void set_clob(char *string)
 EMSCRIPTEN_KEEPALIVE
 void post_clob()
 {
-
-    if (!connected)
-    {
-        EM_ASM(window.location.reload());
-    }
-
     EM_ASM(
         let element = document.querySelector('#char_count');
         while (element.lastChild)

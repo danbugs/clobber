@@ -1727,13 +1727,12 @@ var ASM_CONSTS = {
   224020: function() {let element = document.querySelectorAll('.post'); if (element) { element.forEach(function(e){e.remove()}); }},  
  224129: function() {let element = document.querySelector('#char_count'); while (element.lastChild) { element.removeChild(element.lastChild); }},  
  224252: function($0) {let element = document.querySelector('#char_count'); element.innerHTML += UTF8ToString($0);},  
- 224348: function() {window.location.reload()},  
- 224373: function() {let element = document.querySelector('#char_count'); while (element.lastChild) { element.removeChild(element.lastChild); } element.innerHTML += "<p>Character Count: 0</p>"},  
- 224545: function() {return window.location.hostname == "127.0.0.1" ? 1 : 0;},  
- 224605: function($0) {if (!$0) { AL.alcErr = 0xA004 ; return 1; }},  
- 224653: function($0) {err("bad name in alcGetProcAddress: " + UTF8ToString($0));},  
- 224716: function($0) {if (!AL.currentCtx) { err("alGetProcAddress() called without a valid context"); return 1; } if (!$0) { AL.currentCtx.err = 0xA003 ; return 1; }},  
- 224864: function($0) {err("bad name in alGetProcAddress: " + UTF8ToString($0));}
+ 224348: function() {let element = document.querySelector('#char_count'); while (element.lastChild) { element.removeChild(element.lastChild); } element.innerHTML += "<p>Character Count: 0</p>"},  
+ 224520: function() {return window.location.hostname == "127.0.0.1" ? 1 : 0;},  
+ 224580: function($0) {if (!$0) { AL.alcErr = 0xA004 ; return 1; }},  
+ 224628: function($0) {err("bad name in alcGetProcAddress: " + UTF8ToString($0));},  
+ 224691: function($0) {if (!AL.currentCtx) { err("alGetProcAddress() called without a valid context"); return 1; } if (!$0) { AL.currentCtx.err = 0xA003 ; return 1; }},  
+ 224839: function($0) {err("bad name in alGetProcAddress: " + UTF8ToString($0));}
 };
 
 
@@ -14627,26 +14626,14 @@ var ASM_CONSTS = {
     }
   Module["_emscripten_thread_sleep"] = _emscripten_thread_sleep;
 
-  var WS = {sockets:[null],socketEvent:null};
-  Module["WS"] = WS;
-  function _emscripten_websocket_get_ready_state(socketId, readyState) {
-      var socket = WS.sockets[socketId];
-      if (!socket) {
-        return -3;
-      }
-  
-      HEAP16[((readyState)>>1)] = socket.readyState;
-      return 0;
-    }
-  Module["_emscripten_websocket_get_ready_state"] = _emscripten_websocket_get_ready_state;
-  _emscripten_websocket_get_ready_state.sig = 'iii';
-
   function _emscripten_websocket_is_supported() {
       return typeof WebSocket !== 'undefined';
     }
   Module["_emscripten_websocket_is_supported"] = _emscripten_websocket_is_supported;
   _emscripten_websocket_is_supported.sig = 'i';
 
+  var WS = {sockets:[null],socketEvent:null};
+  Module["WS"] = WS;
   function _emscripten_websocket_new(createAttributes) {
       if (typeof WebSocket === 'undefined') {
         return -1;
@@ -29969,6 +29956,17 @@ var ASM_CONSTS = {
   ___cxa_thread_atexit_impl.sig = 'iii';
 
 
+  function _emscripten_websocket_get_ready_state(socketId, readyState) {
+      var socket = WS.sockets[socketId];
+      if (!socket) {
+        return -3;
+      }
+  
+      HEAP16[((readyState)>>1)] = socket.readyState;
+      return 0;
+    }
+  Module["_emscripten_websocket_get_ready_state"] = _emscripten_websocket_get_ready_state;
+  _emscripten_websocket_get_ready_state.sig = 'iii';
 
   function _emscripten_websocket_get_buffered_amount(socketId, bufferedAmount) {
       var socket = WS.sockets[socketId];
@@ -30752,7 +30750,6 @@ var asmLibraryArg = {
   "emscripten_resize_heap": _emscripten_resize_heap,
   "emscripten_run_script_int": _emscripten_run_script_int,
   "emscripten_thread_sleep": _emscripten_thread_sleep,
-  "emscripten_websocket_get_ready_state": _emscripten_websocket_get_ready_state,
   "emscripten_websocket_is_supported": _emscripten_websocket_is_supported,
   "emscripten_websocket_new": _emscripten_websocket_new,
   "emscripten_websocket_send_utf8_text": _emscripten_websocket_send_utf8_text,
@@ -49885,9 +49882,9 @@ var _num_clobs = Module['_num_clobs'] = 225988;
 var _clobs = Module['_clobs'] = 225992;
 var _curr_clob = Module['_curr_clob'] = 225996;
 var _ws = Module['_ws'] = 225984;
+var _connected = Module['_connected'] = 226000;
 var _main_h = Module['_main_h'] = 206908;
-var _attr = Module['_attr'] = 226000;
-var _connected = Module['_connected'] = 226012;
+var _attr = Module['_attr'] = 226004;
 var ___libc = Module['___libc'] = 226300;
 var ___progname = Module['___progname'] = 226292;
 var ___progname_full = Module['___progname_full'] = 226296;

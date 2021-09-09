@@ -1,1 +1,0 @@
-web: node ./clobber-api/index.js
