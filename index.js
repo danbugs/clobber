@@ -1,5 +1,5 @@
 // if you rename this file, don't forget to change the "server" field in Tarantella.toml
-const Module = require("./build/clobber-api");
+const Module = require("./clobber-api/build/clobber-api.js");
 const express = require("express");
 const { Server } = require("ws");
 const PORT = process.env.PORT || 3000;
