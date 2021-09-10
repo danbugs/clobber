@@ -1,11 +1,10 @@
 /** Includes
 */
-#include <stdio.h>  // asprintf, printf
-#include <stdlib.h> // malloc, free, exit, EXIT_FAILURE
+#include <stdio.h>   // asprintf, printf
+#include <stdlib.h>  // malloc, free, exit, EXIT_FAILURE
 #include <stdbool.h> // bool, true, false
 #include <emscripten/websocket.h>
 #include <emscripten/threading.h>
-
 
 /** Dependencies
 */
@@ -14,6 +13,10 @@
 /** Functions from dependencies
 */
 extern void display_html(html_t raw_html);
+extern void remove_html_with_class(char *class_name);
+extern void display_html_loop(html_t html_formatter, char **elements, int num_elements, bool reverse);
+extern void remove_html_children_of_id(char *id);
+extern void insert_html_at_id(html_t raw_html, char *id);
 
 /** Global variables
 */
